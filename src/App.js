@@ -33,6 +33,7 @@ function App() {
     setTableRows(Props.tableRows);
     setfileType(Props.fileType);
     setComponents(Props.components);
+    setMessage(Props.message);
   };
 
   const getUserInput = (Props) => {

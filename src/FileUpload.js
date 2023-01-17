@@ -106,12 +106,15 @@ function FileUpload(Props) {
 
   const uploadFile = (event) => {
     event.preventDefault();
+    let message="";
     Props.onFileLoad({
       parsedData,
       tableRows,
       rowValues,
       fileType,
       components,
+      message
+
     });
   };
 

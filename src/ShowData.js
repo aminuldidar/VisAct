@@ -7,7 +7,7 @@ function ShowData(Props) {
           <tr>
             {Props.tableData.tableRows.map((rows, index) => {
               return (
-                <th className="capitalize text-md font-bold" key={index}>
+                <th className="capitalize text-lg font-bold text-center" key={index}>
                   {rows}
                 </th>
               );

@@ -79,7 +79,7 @@ function GetChartProperties(Props) {
 
   return (
     <>
-      <h3 className="text-lg">Select chart for getting visualize data</h3>
+      <h3 className="text-lg font-bold text-sky-500 capitalize">Select Chart</h3>
       <form onSubmit={handleSubmit}>
         <select
           onChange={ChartSelector}
@@ -96,8 +96,8 @@ function GetChartProperties(Props) {
           if (chatType[0] !== false) {
             return (
               <>
-                <h3 className="text-lg">
-                  Provide Variable Names (X Axis and Y Axis)
+                <h3 className="text-lg font-bold text-sky-500 capitalize">
+                  Provide required Variable Names
                 </h3>
                 <select
                   onChange={x_axisSet}
@@ -121,17 +121,21 @@ function GetChartProperties(Props) {
                     return <option key={index}>{option}</option>;
                   })}
                 </select>
+
+                <br />
+                <br />
+
+                <button type="submit" className="btn">
+                Show Chart
+              </button>
               </>
             );
           }
         })()}
 
-        <br />
-        <br />
+        
 
-        <button type="submit" className="btn w-[50%]">
-          Show Chart
-        </button>
+        
       </form>
     </>
   );

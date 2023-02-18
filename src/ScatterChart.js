@@ -1,5 +1,5 @@
 import ReactEcharts from 'echarts-for-react';
-function LineChart(Props){
+function ScatterChart(Props){
 
     var parsedData;
     var data_ver_x;
@@ -30,7 +30,10 @@ function LineChart(Props){
         data_ver_x = parsedData.map(parsedData =>  parsedData[Props.data.x_axis]);
         data_ver_y = parsedData.map(parsedData =>  parsedData[Props.data.y_axis]);
 
-    }*/
+    }
+    */
+
+   
   
     return (<ReactEcharts
     
@@ -44,7 +47,7 @@ function LineChart(Props){
                 },
                 series: [{ 
                     data: data_ver_y,
-                    type: 'line',
+                    type: 'scatter',
                     lineStyle: {
                         color: "#25f1f52",
                         width: 2
@@ -57,4 +60,4 @@ function LineChart(Props){
             }}
         />);
         }
-export default LineChart;
+export default ScatterChart;

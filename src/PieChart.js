@@ -75,11 +75,3 @@ function PieChart(Props){
 
 export default PieChart;
 
-/*[
-                            {value: 20, name: 'USA'},
-                            {value: 14, name: 'China'},
-                            {value: 5, name: 'Japan'},
-                            {value: 3.85, name: 'Germany'},
-                            {value: 2.67, name: 'UK'}
-                            ['USA', 'China', 'Japan', 'Germany', 'UK']
-                        ]*/

@@ -1,6 +1,5 @@
 import "./App.css";
 import { useState } from "react";
-//import Papa from "papaparse";
 import PieChart from "./PieChart";
 import LineChart from "./LineChart";
 import BarChart from "./BarChart";
@@ -8,6 +7,10 @@ import ShowData from "./ShowData";
 import GetChartProperties from "./GetChartProperties";
 import FileUpload from "./FileUpload";
 import Navbar from "./component/Navbar";
+import WordCloud from "./WordCloud";
+import DownloadConvFile from "./DownloadConvFile"; 
+import ScatterChart from "./ScatterChart";
+
 
 function App() {
   const [parsedData, setParsedData] = useState([]);
@@ -19,6 +22,8 @@ function App() {
   const [rowValues, setValues] = useState([]);
   // Track file type
   const [fileType, setfileType] = useState("test");
+  const [fileName, setfileName] = useState("");
+  
   const [components, setComponents] = useState([false]);
 
   const [x_axis, setXAxis] = useState("");
@@ -34,6 +39,7 @@ function App() {
     setfileType(Props.fileType);
     setComponents(Props.components);
     setMessage(Props.message);
+    setfileName(Props.fileName);
   };
 
   const getUserInput = (Props) => {
@@ -44,13 +50,28 @@ function App() {
     setMessage(Props.message);
   };
 
+  const dataCloud = [
+    { word: "hello", value: 40 },
+    { word: "world", value: 30 },
+    { word: "react", value: 20 },
+    { word: "Javascript", value: 20 },
+    { word: "PHP", value: 20 },
+    { word: "Great work", value: 20 },
+    { word: "Life is good", value: 20 },
+    { word: "Have fun", value: 20 },
+    { word: "Beautiful", value: 20 },
+    { word: "visax", value: 20 },
+    { word: "Wonderful", value: 20 },
+  ];
+
   return (
     <>
       <Navbar />
 
       <FileUpload onFileLoad={getFileInput} />
-
-      {tableRows.length > 0 && (
+      
+      
+      {/*{tableRows.length > 0 && (*/}
         <div>
           <div>
             {
@@ -58,7 +79,20 @@ function App() {
                 {message}
               </h4>
             }
-            {/*Block:Line Chart */}
+
+            {(() => {
+              
+              if (parsedData.length !== 0) {
+                
+                  return (
+                    <DownloadConvFile
+                      data={{parsedData, tableRows, fileType,fileName }}
+                    />
+                  );
+               
+              }
+            })()}
+           
             {(() => {
               //console.log(parsedData,components[0]);
 
@@ -126,7 +160,46 @@ function App() {
                 );
               }
             })()}
+
+            {(() => {
+              //console.log(parsedData,components[0]);
+
+              if (
+                parsedData.length !== 0 &&
+                x_axis !== "" &&
+                y_axis !== "" &&
+                components[0] === "Scatter Chart"
+              ) {
+                //console.lognpm start('Inside line chart_1');
+                //setComponents([false]);
+                //console.log(parsedData);
+                return (
+                  <ScatterChart
+                    data={{ parsedData, x_axis, y_axis, tableRows, fileType }}
+                  />
+                );
+              }
+            })()}
+
+            {(() => {
+              //console.log(parsedData,components[0]);
+
+              if (
+                parsedData.length !== 0 &&
+                
+                components[0] === "Word Cloud"
+              ) {
+                //console.lognpm start('Inside line chart_1');
+                //setComponents([false]);
+                //console.log(parsedData);
+                return (
+                  <WordCloud data={{ dataCloud }}/>
+                );
+              }
+            })()}
+
           </div>
+        {tableRows.length > 0 && (
           <div className="flex items-center justify-center gap-10">
             <div className="">
               <ShowData tableData={{ tableRows, rowValues }} />
@@ -134,9 +207,12 @@ function App() {
             <div className="">
               <GetChartProperties onSubmit={{ getUserInput, tableRows }} />
             </div>
-          </div>
+          </div>)}
+          
+          
         </div>
-      )}
+
+    
     </>
   );
 }

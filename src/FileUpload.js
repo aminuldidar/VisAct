@@ -11,14 +11,16 @@ function FileUpload(Props) {
   //State to store the values
   const [rowValues, setValues] = useState([]);
   const [fileType, setfileType] = useState("test");
+  const [fileName, setfileName] = useState("datafile");
   const [components, setComponents] = useState([false]);
 
   const changeHandler = (event) => {
     if (event.target.files[0] === undefined) return;
-
+    let fName = event.target.files[0].name.split(".")[0];
     let fType = event.target.files[0].name.split(".")[1];
     console.log(fType);
     setfileType(fType);
+    setfileName(fName);
 
     setComponents([false]);
 
@@ -42,6 +44,8 @@ function FileUpload(Props) {
           // Parsed Data Response in array format
 
           setParsedData(results.data);
+          //console.log("Data object:", results.data);
+          //console.log('Data object to JSON:',JSON.stringify(results.data));
           //parsedData=results.data;
 
           // Filtered Column Names
@@ -52,9 +56,7 @@ function FileUpload(Props) {
           // Filtered Values
           //console.log(valuesArray);
           setValues(valuesArray);
-          //parsedData=results.data;
-          //tableRows = rowsArray[0];
-          //rowValues=valuesArray;
+          
         },
       });
       console.log("File upload props", Props);
@@ -69,8 +71,8 @@ function FileUpload(Props) {
         //var result = Object.keys(DataObject).map((key) => [Number(key), DataObject[key]]);
         let result = [];
         let dcol = 0;
-        console.log("DataObject:", DataObject);
-        setParsedData(DataObject);
+        //console.log("DataObject:", DataObject);
+        //setParsedData(DataObject);
         for (const [key, value] of Object.entries(DataObject)) {
           console.log(`${key}: ${value}`);
           //let dum=[];
@@ -89,7 +91,21 @@ function FileUpload(Props) {
           dcol = dcol + 1;
         }
         //console.log("result:",result);
-
+        
+        
+        var colNames=Object.keys(DataObject)
+        var DataObjectUp =[];
+        for (var i = 0; i < result.length; i++) {
+            //console.log(result[i]);
+            var dataObj ={};
+            for (var j = 0; j < result[i].length; j++) {
+              dataObj[colNames[j]]=result[i][j];
+            }
+            //console.log(dataObj);
+            DataObjectUp.push(dataObj);
+        }
+        console.log('DataObjectUp',DataObjectUp);
+        setParsedData(DataObjectUp);
         setTableRows(Object.keys(DataObject));
         setValues(result);
 
@@ -113,7 +129,8 @@ function FileUpload(Props) {
       rowValues,
       fileType,
       components,
-      message
+      message,
+      fileName
 
     });
   };

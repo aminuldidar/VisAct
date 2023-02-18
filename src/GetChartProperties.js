@@ -41,7 +41,7 @@ function GetChartProperties(Props) {
         console.log("User Selected Value - ", event.target.value)
     }
     */
-  const chartSelect = ["Line Chart", "Bar Chart", "Pie Chart"];
+  const chartSelect = ["Line Chart", "Bar Chart", "Pie Chart","Scatter Chart","Word Cloud"];
 
   const ChartSelector = (event) => {
     event.preventDefault();
@@ -65,6 +65,12 @@ function GetChartProperties(Props) {
           "Please choose corresponding value column",
         ]);
         break;
+      case "Scatter Chart":
+        setDimestions(["Please choose X Axis", "Please choose Y Axis"]);
+        break;
+      case "Word Cloud":
+        setDimestions([]);
+        break;
       default:
       // code block
     }
@@ -77,14 +83,39 @@ function GetChartProperties(Props) {
 
   //console.log(Props.onSubmit.tableRows);
 
+  var optionRend = <div>
+                   
+  <>
+    <h3 className="text-lg font-bold text-sky-500 capitalize">
+    Provide required Variable Names</h3>
+    
+    <select onChange={x_axisSet}
+    className="bg-teal-500 p-[14px] border rounded-md text-medium text-white hover:bg-cyan-500 cursor-pointer">
+      <option>{dimestions[0]}</option>
+      {options.map((option, index) => {
+        return <option key={index}>{option}</option>;
+      })}
+    </select>
+    <br /><br />
+    <select onChange={y_axisSet}
+      className="bg-teal-500 p-[14px] border rounded-md text-medium text-white hover:bg-cyan-500 cursor-pointer">
+      <option>{dimestions[1]}</option>
+      {options.map((option, index) => {
+        return <option key={index}>{option}</option>;
+      })}
+    </select>
+    <br /><br />
+  </>
+  
+</div>
+
   return (
     <>
       <h3 className="text-lg font-bold text-sky-500 capitalize">Select Chart</h3>
       <form onSubmit={handleSubmit}>
         <select
           onChange={ChartSelector}
-          className="bg-sky-500 p-[14px] border rounded-md  text-medium text-white hover:bg-cyan-500 cursor-pointer"
-        >
+          className="bg-sky-500 p-[14px] border rounded-md  text-medium text-white hover:bg-cyan-500 cursor-pointer">
           <option>Please choose Chart</option>
           {chartSelect.map((option, index) => {
             return <option key={index}>{option}</option>;
@@ -96,44 +127,16 @@ function GetChartProperties(Props) {
           if (chatType[0] !== false) {
             return (
               <>
-                <h3 className="text-lg font-bold text-sky-500 capitalize">
-                  Provide required Variable Names
-                </h3>
-                <select
-                  onChange={x_axisSet}
-                  className="bg-teal-500 p-[14px] border rounded-md text-medium text-white hover:bg-cyan-500 cursor-pointer"
-                >
-                  <option>{dimestions[0]}</option>
-                  {options.map((option, index) => {
-                    return <option key={index}>{option}</option>;
-                  })}
-                </select>
+                
+                {chatType[0] !== "Word Cloud" && optionRend}
 
-                <br />
-                <br />
-
-                <select
-                  onChange={y_axisSet}
-                  className="bg-teal-500 p-[14px] border rounded-md text-medium text-white hover:bg-cyan-500 cursor-pointer"
-                >
-                  <option>{dimestions[1]}</option>
-                  {options.map((option, index) => {
-                    return <option key={index}>{option}</option>;
-                  })}
-                </select>
-
-                <br />
-                <br />
-
-                <button type="submit" className="btn">
+              <button type="submit" className="btn">
                 Show Chart
               </button>
-              </>
+            </>
             );
           }
         })()}
-
-        
 
         
       </form>

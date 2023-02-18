@@ -27,8 +27,8 @@ function BarChart(Props) {
         
     });
 
-    console.log(legendData);
-    console.log(dataDisplay);
+    //console.log(legendData);
+    //console.log(dataDisplay);
 
   return(<ReactEcharts
     option={{

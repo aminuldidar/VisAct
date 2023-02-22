@@ -8,9 +8,8 @@ import GetChartProperties from "./GetChartProperties";
 import FileUpload from "./FileUpload";
 import Navbar from "./component/Navbar";
 import WordCloud from "./WordCloud";
-import DownloadConvFile from "./DownloadConvFile"; 
+import DownloadConvFile from "./DownloadConvFile";
 import ScatterChart from "./ScatterChart";
-
 
 function App() {
   const [parsedData, setParsedData] = useState([]);
@@ -23,7 +22,7 @@ function App() {
   // Track file type
   const [fileType, setfileType] = useState("test");
   const [fileName, setfileName] = useState("");
-  
+
   const [components, setComponents] = useState([false]);
 
   const [x_axis, setXAxis] = useState("");
@@ -69,150 +68,138 @@ function App() {
       <Navbar />
 
       <FileUpload onFileLoad={getFileInput} />
-      
-      
+
       {/*{tableRows.length > 0 && (*/}
+      <div>
         <div>
-          <div>
-            {
-              <h4 className="text-center text-sky-500 font-bold text-2xl mt-10">
-                {message}
-              </h4>
+          {
+            <h4 className="text-center text-sky-500 font-bold text-2xl mt-6">
+              {message}
+            </h4>
+          }
+
+          {(() => {
+            //console.log(parsedData,components[0]);
+
+            if (
+              parsedData.length !== 0 &&
+              x_axis !== "" &&
+              y_axis !== "" &&
+              components[0] === "Line Chart"
+            ) {
+              //console.lognpm start('Inside line chart_1');
+              //setComponents([false]);
+              //console.log(parsedData);
+              return (
+                <LineChart
+                  data={{ parsedData, x_axis, y_axis, tableRows, fileType }}
+                />
+              );
             }
+          })()}
 
-            {(() => {
-              
-              if (parsedData.length !== 0) {
-                
-                  return (
-                    <DownloadConvFile
-                      data={{parsedData, tableRows, fileType,fileName }}
-                    />
-                  );
-               
-              }
-            })()}
-           
-            {(() => {
-              //console.log(parsedData,components[0]);
+          {/*Block: Pie Chart */}
 
-              if (
-                parsedData.length !== 0 &&
-                x_axis !== "" &&
-                y_axis !== "" &&
-                components[0] === "Line Chart"
-              ) {
-                //console.lognpm start('Inside line chart_1');
-                //setComponents([false]);
-                //console.log(parsedData);
-                return (
-                  <LineChart
-                    data={{ parsedData, x_axis, y_axis, tableRows, fileType }}
-                  />
-                );
-              }
-            })()}
+          {(() => {
+            //console.log(parsedData,components[0]);
 
-            {/*Block: Pie Chart */}
+            if (parsedData.length !== 0 && components[0] === "Pie Chart") {
+              //&& x_axis !=='' && y_axis !==''
+              //console.lognpm start('Inside line chart_1');
+              //setComponents([false]);
+              console.log(tableRows, rowValues);
+              return (
+                <PieChart
+                  chartData={{
+                    x_axis,
+                    y_axis,
+                    tableRows,
+                    rowValues,
+                    parsedData,
+                  }}
+                />
+              );
+            }
+          })()}
 
-            {(() => {
-              //console.log(parsedData,components[0]);
+          {/*Block: Bar Chart */}
 
-              if (parsedData.length !== 0 && components[0] === "Pie Chart") {
-                //&& x_axis !=='' && y_axis !==''
-                //console.lognpm start('Inside line chart_1');
-                //setComponents([false]);
-                console.log(tableRows, rowValues);
-                return (
-                  <PieChart
-                    chartData={{
-                      x_axis,
-                      y_axis,
-                      tableRows,
-                      rowValues,
-                      parsedData,
-                    }}
-                  />
-                );
-              }
-            })()}
+          {(() => {
+            //console.log(parsedData,components[0]);
 
-            {/*Block: Bar Chart */}
+            if (parsedData.length !== 0 && components[0] === "Bar Chart") {
+              //&& x_axis !=='' && y_axis !==''
+              //console.lognpm start('Inside line chart_1');
+              //setComponents([false]);
+              console.log(tableRows, rowValues);
+              return (
+                <BarChart
+                  chartData={{
+                    x_axis,
+                    y_axis,
+                    tableRows,
+                    rowValues,
+                    parsedData,
+                  }}
+                />
+              );
+            }
+          })()}
 
-            {(() => {
-              //console.log(parsedData,components[0]);
+          {(() => {
+            //console.log(parsedData,components[0]);
 
-              if (parsedData.length !== 0 && components[0] === "Bar Chart") {
-                //&& x_axis !=='' && y_axis !==''
-                //console.lognpm start('Inside line chart_1');
-                //setComponents([false]);
-                console.log(tableRows, rowValues);
-                return (
-                  <BarChart
-                    chartData={{
-                      x_axis,
-                      y_axis,
-                      tableRows,
-                      rowValues,
-                      parsedData,
-                    }}
-                  />
-                );
-              }
-            })()}
+            if (
+              parsedData.length !== 0 &&
+              x_axis !== "" &&
+              y_axis !== "" &&
+              components[0] === "Scatter Chart"
+            ) {
+              //console.lognpm start('Inside line chart_1');
+              //setComponents([false]);
+              //console.log(parsedData);
+              return (
+                <ScatterChart
+                  data={{ parsedData, x_axis, y_axis, tableRows, fileType }}
+                />
+              );
+            }
+          })()}
 
-            {(() => {
-              //console.log(parsedData,components[0]);
+          {(() => {
+            //console.log(parsedData,components[0]);
 
-              if (
-                parsedData.length !== 0 &&
-                x_axis !== "" &&
-                y_axis !== "" &&
-                components[0] === "Scatter Chart"
-              ) {
-                //console.lognpm start('Inside line chart_1');
-                //setComponents([false]);
-                //console.log(parsedData);
-                return (
-                  <ScatterChart
-                    data={{ parsedData, x_axis, y_axis, tableRows, fileType }}
-                  />
-                );
-              }
-            })()}
-
-            {(() => {
-              //console.log(parsedData,components[0]);
-
-              if (
-                parsedData.length !== 0 &&
-                
-                components[0] === "Word Cloud"
-              ) {
-                //console.lognpm start('Inside line chart_1');
-                //setComponents([false]);
-                //console.log(parsedData);
-                return (
-                  <WordCloud data={{ dataCloud }}/>
-                );
-              }
-            })()}
-
-          </div>
+            if (parsedData.length !== 0 && components[0] === "Word Cloud") {
+              //console.lognpm start('Inside line chart_1');
+              //setComponents([false]);
+              //console.log(parsedData);
+              return <WordCloud data={{ dataCloud }} />;
+            }
+          })()}
+        </div>
         {tableRows.length > 0 && (
           <div className="flex items-center justify-center gap-10">
             <div className="">
               <ShowData tableData={{ tableRows, rowValues }} />
             </div>
-            <div className="">
+            <div className=" flex flex-col">
+              <div className="">
+                {(() => {
+                  if (parsedData.length !== 0) {
+                    return (
+                      <DownloadConvFile
+                        data={{ parsedData, tableRows, fileType, fileName }}
+                      />
+                    );
+                  }
+                })()}
+              </div>
+
               <GetChartProperties onSubmit={{ getUserInput, tableRows }} />
             </div>
-          </div>)}
-          
-          
-        </div>
-
-    
+          </div>
+        )}
+      </div>
     </>
   );
 }

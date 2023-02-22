@@ -56,7 +56,6 @@ function FileUpload(Props) {
           // Filtered Values
           //console.log(valuesArray);
           setValues(valuesArray);
-          
         },
       });
       console.log("File upload props", Props);
@@ -91,20 +90,19 @@ function FileUpload(Props) {
           dcol = dcol + 1;
         }
         //console.log("result:",result);
-        
-        
-        var colNames=Object.keys(DataObject)
-        var DataObjectUp =[];
+
+        var colNames = Object.keys(DataObject);
+        var DataObjectUp = [];
         for (var i = 0; i < result.length; i++) {
-            //console.log(result[i]);
-            var dataObj ={};
-            for (var j = 0; j < result[i].length; j++) {
-              dataObj[colNames[j]]=result[i][j];
-            }
-            //console.log(dataObj);
-            DataObjectUp.push(dataObj);
+          //console.log(result[i]);
+          var dataObj = {};
+          for (var j = 0; j < result[i].length; j++) {
+            dataObj[colNames[j]] = result[i][j];
+          }
+          //console.log(dataObj);
+          DataObjectUp.push(dataObj);
         }
-        console.log('DataObjectUp',DataObjectUp);
+        console.log("DataObjectUp", DataObjectUp);
         setParsedData(DataObjectUp);
         setTableRows(Object.keys(DataObject));
         setValues(result);
@@ -122,7 +120,7 @@ function FileUpload(Props) {
 
   const uploadFile = (event) => {
     event.preventDefault();
-    let message="";
+    let message = "";
     Props.onFileLoad({
       parsedData,
       tableRows,
@@ -130,8 +128,7 @@ function FileUpload(Props) {
       fileType,
       components,
       message,
-      fileName
-
+      fileName,
     });
   };
 
@@ -147,7 +144,7 @@ function FileUpload(Props) {
             name="file"
             onChange={changeHandler}
             accept=".csv, .json"
-            className="px-5 py-3 font-medium text-medium text-grey-600 bg-white border border-gray-500 rounded-lg transition duration-250 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-800 mb-4"
+            className="px-5 py-3 font-medium text-medium text-grey-600 bg-white border border-gray-500 rounded-lg transition duration-250 ease-in-out focus:text-gray-700 focus:bg-white focus:border-slate-800 mb-3"
           />
           <button type="submit" className="btn">
             Upload

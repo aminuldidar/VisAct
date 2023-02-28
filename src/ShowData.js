@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function ShowData(Props) {
-  const [rowNumStart, setRowNumStart] = useState([0]);
+  const [rowNumStart, setRowNumStart] = useState([1]);
   const [rowNumEnd, setRowNumEnd] = useState([10]);
 
   const displayRows = (event) => {
@@ -73,7 +73,7 @@ function ShowData(Props) {
         {
           <tbody>
             {Props.tableData.rowValues
-              .slice(rowNumStart, rowNumEnd)
+              .slice(rowNumStart-1, rowNumEnd)
               .map((value, index) => {
                 //console.log(index);
                 //if(index<10)

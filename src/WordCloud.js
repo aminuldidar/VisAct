@@ -20,11 +20,14 @@ function WordCloud(Props){
     { word: "Wonderful", value: 20 },
   ];
   */
-
+  //console.log('parsedData: ',Props.data.parsedData);
+  var prsdata=Props.data.parsedData;
+  console.log('Outside WordCloud..');
   useEffect(() => {
+    console.log('WordCloud printing..:',prsdata);
     const layout = d3cloud()
       .size([500, 500])
-      .words(Props.data.dataCloud.map((d) => ({ text: d.word, size: d.value })))
+      .words(prsdata.map((d) => ({ text: d.word, size: d.value })))
       .padding(5)
       .rotate(() => ~~(Math.random() * 2) * 90)
       .font("Impact")
@@ -56,12 +59,14 @@ function WordCloud(Props){
         .attr("transform", (d) => `translate(${[d.x, d.y]})rotate(${d.rotate})`)
         .text((d) => d.text);
     }
-  }, [Props.data.dataCloud]);
+  }, [prsdata]);
+
+ 
 
   
   return <div>
   <div className="flex justify-center items-center">
-  <svg width="500" height="500" ref={svgRef} />
+    <svg width="500" height="500" ref={svgRef} />
   </div>
 </div>;
 };

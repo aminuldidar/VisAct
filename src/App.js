@@ -48,7 +48,7 @@ function App() {
     setComponents(Props.chatType);
     setMessage(Props.message);
   };
-
+/*
   const dataCloud = [
     { word: "hello", value: 40 },
     { word: "world", value: 30 },
@@ -62,7 +62,7 @@ function App() {
     { word: "visax", value: 20 },
     { word: "Wonderful", value: 20 },
   ];
-
+*/
   return (
     <>
       <Navbar />
@@ -172,8 +172,8 @@ function App() {
             if (parsedData.length !== 0 && components[0] === "Word Cloud") {
               //console.lognpm start('Inside line chart_1');
               //setComponents([false]);
-              //console.log(parsedData);
-              return <WordCloud data={{ dataCloud }} />;
+              //console.log('WordCloud printing..');
+              return <WordCloud data={{ parsedData }} />;
             }
           })()}
         </div>

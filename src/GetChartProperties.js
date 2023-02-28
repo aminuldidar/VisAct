@@ -69,7 +69,7 @@ function GetChartProperties(Props) {
         setDimestions(["Please choose X Axis", "Please choose Y Axis"]);
         break;
       case "Word Cloud":
-        setDimestions([]);
+        setDimestions(["Please the text variable", "Please choose frequency variable"]);
         break;
       default:
       // code block
@@ -128,7 +128,7 @@ function GetChartProperties(Props) {
             return (
               <>
                 
-                {chatType[0] !== "Word Cloud" && optionRend}
+                {/*chatType[0] !== "Word Cloud" && */optionRend}
 
               <button type="submit" className="btn">
                 Show Chart

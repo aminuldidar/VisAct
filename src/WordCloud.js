@@ -5,26 +5,12 @@ import d3cloud from "d3-cloud";
 function WordCloud(Props){
     //console.log(Props.data);
   const svgRef = useRef();
-    /*
-  const data = [
-    { word: "hello", value: 40 },
-    { word: "world", value: 30 },
-    { word: "react", value: 20 },
-    { word: "Javascript", value: 20 },
-    { word: "PHP", value: 20 },
-    { word: "Great work", value: 20 },
-    { word: "Life is good", value: 20 },
-    { word: "Have fun", value: 20 },
-    { word: "Beautiful", value: 20 },
-    { word: "visax", value: 20 },
-    { word: "Wonderful", value: 20 },
-  ];
-  */
+ 
   //console.log('parsedData: ',Props.data.parsedData);
   var prsdata=Props.data.parsedData;
-  console.log('Outside WordCloud..');
+  //console.log('Outside WordCloud..');
   useEffect(() => {
-    console.log('WordCloud printing..:',prsdata);
+    //console.log('WordCloud printing..:',prsdata);
     const layout = d3cloud()
       .size([500, 500])
       .words(prsdata.map((d) => ({ text: d.word, size: d.value })))
@@ -62,8 +48,6 @@ function WordCloud(Props){
   }, [prsdata]);
 
  
-
-  
   return <div>
   <div className="flex justify-center items-center">
     <svg width="500" height="500" ref={svgRef} />
